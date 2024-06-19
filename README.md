@@ -11,7 +11,7 @@ The goal of this assessment is to evaluate your ability to develop a backend sys
 ### Microservices Architecture
 
 - Develop three microservices:
-  - **Customer Service** (Python)
+  - **Profile Service** (Python)
   - **Order and Product Service** (Java | Spring Boot)
   - **Notification Service** (Python)
 - All services should use MySQL as the database.
@@ -33,18 +33,18 @@ The goal of this assessment is to evaluate your ability to develop a backend sys
 
 ## Instructions
 
-### Customer Service (Python)
+### Profile Service (Python)
 
 #### Setup
 
-- Create a Flask or Django application for Customer Service.
+- Create a Flask or Django application for Profile Service.
 - Integrate MySQL for data storage.
 
 #### Functional Requirements
 
-- Implement CRUD operations for managing Customer entities.
+- Implement CRUD operations for managing Profile entities.
 
-**Schema for Customer**
+**Schema for Profile**
 
 ```json
 {
