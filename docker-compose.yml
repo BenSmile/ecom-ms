@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  customer-service:
+    build:
+      context: ./Customer_service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_NAME=mydatabase
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
+
+  order-service:
+    build:
+      context: ./Order_Product_service
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_NAME=mydatabase
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
+
+  interface-utilisateur:
+    build:
+      context: ./ecom_ui
+    ports:
+      - "8002:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_NAME=db
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
+
+  notification-service:
+    build:
+      context: ./Notification_service
+    ports:
+      - "8003:80"  # Port 80 pour l'interface utilisateur
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=mydatabase
