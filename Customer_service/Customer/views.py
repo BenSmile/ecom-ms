@@ -21,9 +21,10 @@ def get_customers(request):
         datas = {"customers": list(customers.values())}
         return JsonResponse(datas)
 
-def get_customer(request, id):
+def get_customer(request):
     if request.method == 'GET':
-        customer = get_object_or_404(Customer, id=id)
+        user = request.user
+        customer = get_object_or_404(Customer, id=user.id)
         return JsonResponse({
             'id': customer.id,
             'firstname': customer.firstname,
