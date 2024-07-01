@@ -1,12 +1,12 @@
-# urls.py
 from django.urls import path
-from . import views
+from .views import *
 
 urlpatterns = [
-    path('customer', views.create_customer, name='create_customer'),
-    path('customers', views.get_customers, name='get_customers'),
-    path('customer-login', views.login_customer, name='login_customer'),
-    path('customer-get', views.get_customer, name='get_customer'),
-    path('customers/<int:id>', views.update_customer, name='update_customer'),
-    path('customers/<int:id>', views.delete_customer, name='delete_customer'),
+    path('', list_users, name='users_list'),  # Lister tous les users
+    path('login', login_view, name='login'), # Login
+    path('logout', logout_view, name='logout'), # Logout
+    path('register', register_view, name='register'), # Enregistrement du user
+    path('get-user/<int:user_id>', read_user, name='get_user'),  # Récupérer un user par son ID
+    path('update/<int:pk>', update_user, name='update'),  # Mettre à jour un user
+    path('delete/<int:pk>', delete_user, name='delete'),  # Supprimer un user
 ]
