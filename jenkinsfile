@@ -8,7 +8,7 @@ pipeline {
                     docker.build('customer-service', './Customer_service')
                     docker.build('order-service', './Order_Product_service')
                     docker.build('notification-service', './Notification_service')
-                    docker.build('interface-utilisateur', './ecom_ui')
+                    docker.build('user-interface', './ecom_ui')
                 }
             }
         }
@@ -19,12 +19,12 @@ pipeline {
                         sh 'pytest'
                     }
                     docker.image('order-service').inside {
-                        sh 'python manage.py test'
+                        sh 'gradle test'
                     }
                     docker.image('notification-service').inside {
                         sh 'pytest'
                     }
-                    docker.image('interface-utilisateur').inside {
+                    docker.image('user-interface').inside {
                         sh 'pytest'
                     }
                 }

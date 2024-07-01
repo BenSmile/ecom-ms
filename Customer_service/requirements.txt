@@ -1,4 +1,4 @@
 Django
 mysqlclient
 pika
-djangorestframework_simplejwt
+pytest

@@ -11,7 +11,7 @@ services:
     environment:
       - DJANGO_DB_HOST=db
       - DJANGO_DB_PORT=3306
-      - DJANGO_DB_NAME=mydatabase
+      - DJANGO_DB_NAME=db_Customer_service
       - DJANGO_DB_USER=root
       - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
 
@@ -25,11 +25,11 @@ services:
     environment:
       - DJANGO_DB_HOST=db
       - DJANGO_DB_PORT=3306
-      - DJANGO_DB_NAME=mydatabase
+      - DJANGO_DB_NAME=${SPRING_BOOT_DB}
       - DJANGO_DB_USER=root
-      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
+      - DJANGO_DB_PASSWORD=${SPRING_BOOT_DB_PASSWORD}
 
-  interface-utilisateur:
+  user-interface:
     build:
       context: ./ecom_ui
     ports:
