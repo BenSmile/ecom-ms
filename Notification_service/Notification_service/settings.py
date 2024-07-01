@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-22xbml*^on!#gsb^%!2+nh^dpu3*j9yx@fv#^gk!9dn7@e=@54'
+SECRET_KEY = 'django-insecure-x#app-)jnvzi22d%77oa546lc^#g)z!0$*z3!9c*75++^)loup'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Notification',
 ]
 
 MIDDLEWARE = [
@@ -76,20 +75,10 @@ WSGI_APPLICATION = 'Notification_service.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_notification_service',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',   # ou l'adresse de votre serveur MySQL
-        'PORT': '3306', 
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# RabbitMQ Configuration
-RABBITMQ_HOST = 'localhost'
-RABBITMQ_PORT = 5672
-RABBITMQ_USER = 'guest'
-RABBITMQ_PASSWORD = 'guest'
 
 
 # Password validation
@@ -127,9 +116,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

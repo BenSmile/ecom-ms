@@ -6,9 +6,30 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Customer
 import json
 
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def login_customer(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # Connexion réussie
+            login(request, user)
+            # Redirection vers la page d'accueil ou une autre page après connexion
+            return redirect('home')
+        else:
+            # Échec de l'authentification
+            return JsonResponse({'message' : 'Informations incorrectes !'})
+    else:
+        # Demande GET (affichage du formulaire de connexion)
+        return JsonResponse(user)
 
 
-@csrf_exempt
+
 def create_customer(request):
     if request.method == 'POST':
         data = json.loads(request.body)
