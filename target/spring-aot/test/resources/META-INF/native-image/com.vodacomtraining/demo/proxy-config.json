@@ -1,0 +1,109 @@
+[
+  {
+    "interfaces": [
+      "com.vodacomtraining.demo.Repository.OrderRepository",
+      "org.springframework.aop.SpringProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "com.vodacomtraining.demo.Repository.OrderRepository",
+      "org.springframework.data.repository.Repository",
+      "org.springframework.transaction.interceptor.TransactionalProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "com.vodacomtraining.demo.Repository.OrderRepository",
+      "org.springframework.data.repository.Repository",
+      "org.springframework.transaction.interceptor.TransactionalProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy",
+      "java.io.Serializable"
+    ]
+  },
+  {
+    "interfaces": [
+      "com.vodacomtraining.demo.Repository.ProductRepository",
+      "org.springframework.aop.SpringProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "com.vodacomtraining.demo.Repository.ProductRepository",
+      "org.springframework.data.repository.Repository",
+      "org.springframework.transaction.interceptor.TransactionalProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.hibernate.Session",
+      "org.springframework.orm.jpa.EntityManagerProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.hibernate.SessionFactory",
+      "org.springframework.orm.jpa.EntityManagerFactoryInfo"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.hibernate.query.hql.spi.SqmQueryImplementor",
+      "org.hibernate.query.sqm.internal.SqmInterpretationsKey$InterpretationsKeySource",
+      "org.hibernate.query.spi.DomainQueryExecutionContext",
+      "org.hibernate.query.SelectionQuery",
+      "org.hibernate.query.CommonQueryContract"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.hibernate.query.sql.spi.NativeQueryImplementor",
+      "org.hibernate.query.spi.DomainQueryExecutionContext",
+      "org.hibernate.query.internal.ResultSetMappingResolutionContext",
+      "org.hibernate.query.spi.QueryImplementor",
+      "org.hibernate.query.SelectionQuery",
+      "org.hibernate.query.CommonQueryContract"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.springframework.amqp.rabbit.connection.ChannelProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.springframework.amqp.rabbit.connection.ChannelProxy",
+      "org.springframework.amqp.rabbit.connection.PublisherCallbackChannel"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer$ContainerDelegate",
+      "org.springframework.aop.SpringProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.springframework.data.annotation.QueryAnnotation"
+    ]
+  },
+  {
+    "interfaces": [
+      "org.springframework.data.jpa.repository.support.CrudMethodMetadata",
+      "org.springframework.aop.SpringProxy",
+      "org.springframework.aop.framework.Advised",
+      "org.springframework.core.DecoratingProxy"
+    ]
+  }
+]
