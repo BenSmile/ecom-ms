@@ -9,9 +9,9 @@ pipeline {
                     dir('Customer_service') {
                         sh 'docker build -t customer-service .'
                     }
-                    // dir('Order_Product_service') {
-                    //     sh 'docker build -t order-service .'
-                    // }
+                    dir('Order_Product_service') {
+                        sh 'docker build -t order-service .'
+                    }
                     dir('Notification_service') {
                         sh 'docker build -t notification-service .'
                     }
@@ -31,9 +31,9 @@ pipeline {
                     }
 
                     // Exécuter les tests pour order-service
-                    // dir('Order_Product_service') {
-                    //     sh 'docker run --rm order-service gradle test'
-                    // }
+                    dir('Order_Product_service') {
+                        sh 'docker run --rm order-service gradle test'
+                    }
 
                     // Exécuter les tests pour notification-service
                     dir('Notification_service') {

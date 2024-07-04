@@ -11,10 +11,23 @@ services:
     environment:
       - DJANGO_DB_HOST=db
       - DJANGO_DB_PORT=3306
-      - DJANGO_DB_USER=${DJANGO_DB_USER_COS}
-      - DJANGO_DB_NAME=${DJANGO_DB_NAME_COS}
-      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD_COS}
+      - DJANGO_DB_NAME=db_Customer_service
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
 
+  order-service:
+    build:
+      context: ./Order_Product_service
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+    environment:
+      - SPRING_BOOT_HOST=db
+      - SPRING_BOOT_PORT=3306
+      - SPRING_BOOT_USER=root
+      - SPRING_BOOT_DB_PASSWORD=${SPRING_BOOT_DB_PASSWORD}
+      - SPRING_BOOT_DB_NAME=db_Order_Product_service
 
   user-interface:
     build:
@@ -24,7 +37,11 @@ services:
     depends_on:
       - db
     environment:
-      # 
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_NAME=db_User_Interface
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
 
   notification-service:
     build:
@@ -36,9 +53,9 @@ services:
     environment:
       - DJANGO_DB_HOST=db
       - DJANGO_DB_PORT=3306
-      - DJANGO_DB_USER=${DJANGO_DB_USER_NOT}
-      - DJANGO_DB_NAME=${DJANGO_DB_NAME_NOT}
-      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD_NOT}
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_NAME=db_Notification_service
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
 
   rabbitmq:
     image: rabbitmq:3-management
