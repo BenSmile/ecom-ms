@@ -23,11 +23,11 @@ services:
     depends_on:
       - db
     environment:
-      - DJANGO_DB_HOST=db
-      - DJANGO_DB_PORT=3306
-      - DJANGO_DB_NAME=${SPRING_BOOT_DB}
-      - DJANGO_DB_USER=root
-      - DJANGO_DB_PASSWORD=${SPRING_BOOT_DB_PASSWORD}
+      - SPRING_BOOT_HOST=db
+      - SPRING_BOOT_PORT=3306
+      - SPRING_BOOT_USER=root
+      - SPRING_BOOT_DB_PASSWORD=${SPRING_BOOT_DB_PASSWORD}
+      - SPRING_BOOT_DB_NAME=db_Order_Product_service
 
   user-interface:
     build:
@@ -39,17 +39,23 @@ services:
     environment:
       - DJANGO_DB_HOST=db
       - DJANGO_DB_PORT=3306
-      - DJANGO_DB_NAME=db
       - DJANGO_DB_USER=root
+      - DJANGO_DB_NAME=db_User_Interface
       - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
 
   notification-service:
     build:
       context: ./Notification_service
     ports:
-      - "8003:80"  # Port 80 pour l'interface utilisateur
+      - "8003:80"
     depends_on:
       - rabbitmq
+    environment:
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_NAME=db_Notification_service
+      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -58,7 +64,7 @@ services:
       - "15672:15672"
     environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
 
   db:
     image: mysql:5.7

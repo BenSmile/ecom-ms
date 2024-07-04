@@ -5,35 +5,54 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build('customer-service', './Customer_service')
-                    docker.build('order-service', './Order_Product_service')
-                    docker.build('notification-service', './Notification_service')
-                    docker.build('user-interface', './ecom_ui')
+                    // Construire les images Docker pour les services
+                    dir('Customer_service') {
+                        sh 'docker build -t customer-service .'
+                    }
+                    dir('Order_Product_service') {
+                        sh 'docker build -t order-service .'
+                    }
+                    dir('Notification_service') {
+                        sh 'docker build -t notification-service .'
+                    }
+                    dir('ecom_ui') {
+                        sh 'docker build -t user-interface .'
+                    }
                 }
             }
         }
+        
         stage('Test') {
             steps {
                 script {
-                    docker.image('customer-service').inside {
-                        sh 'pytest'
+                    // Exécuter les tests pour customer-service
+                    dir('Customer_service') {
+                        sh 'docker run --rm customer-service pytest'
                     }
-                    docker.image('order-service').inside {
-                        sh 'gradle test'
+
+                    // Exécuter les tests pour order-service
+                    dir('Order_Product_service') {
+                        sh 'docker run --rm order-service gradle test'
                     }
-                    docker.image('notification-service').inside {
-                        sh 'pytest'
+
+                    // Exécuter les tests pour notification-service
+                    dir('Notification_service') {
+                        sh 'docker run --rm notification-service pytest'
                     }
-                    docker.image('user-interface').inside {
-                        sh 'pytest'
+
+                    // Exécuter les tests pour user-interface
+                    dir('ecom_ui') {
+                        sh 'docker run --rm user-interface pytest'
                     }
                 }
             }
         }
+        
         stage('Deploy') {
             steps {
                 script {
-                    docker-compose up -d
+                    // Déployer les conteneurs avec Docker Compose
+                    sh 'docker-compose up -d'
                 }
             }
         }
