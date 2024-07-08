@@ -1,0 +1,59 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Build Images') {
+      steps {
+        script {
+          // Tableau contenant les noms des répertoires et les commandes de build Docker
+          def services = [
+            [ name: 'Customer_service', command: 'docker build -t customer-service .' ],
+            [ name: 'Order_Product_service', command: 'docker build -t order-service .' ],
+            [ name: 'Notification_service', command: 'docker build -t notification-service .' ],
+            [ name: 'ecom_ui', command: 'docker build -t user-interface .' ]
+          ]
+
+          // Boucle pour construire les images Docker pour chaque service
+          for (service in services) {
+            dir(service.name) {
+              sh service.command
+            }
+          }
+        }
+      }
+    }
+
+    stage('Test Services') {
+      steps {
+        script {
+          // Tableau contenant les noms des répertoires et les commandes de test
+          def services = [
+            [ name: 'Customer_service', command: 'docker run --rm customer-service pytest' ],
+            [ name: 'Order_Product_service', command: 'docker run --rm order-service gradle test' ],
+            [ name: 'Notification_service', command: 'docker run --rm notification-service pytest' ],
+            [ name: 'ecom_ui', command: 'docker run --rm user-interface pytest' ]
+          ]
+
+          // Boucle pour exécuter les tests unitaires pour chaque service
+          for (service in services) {
+            dir(service.name) {
+              sh service.command
+            }
+          }
+        }
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        sh 'docker-compose up -d'
+      }
+    }
+  }
+}

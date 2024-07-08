@@ -1,0 +1,25 @@
+# Base image for Spring Boot application
+FROM openjdk:17-jdk-slim  AS builder
+
+# Copy project files to builder stage
+WORKDIR /app
+COPY . .
+
+# Build the project using Maven (assuming you're using Maven)
+RUN mvn clean package
+
+# Final image for running the application
+FROM openjdk:17-jre-slim
+
+# Copy compiled JAR files from builder stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Set working directory
+WORKDIR /app
+
+# Expose port (change 8082 if needed)
+EXPOSE 8082
+
+# Command to run the application (entry point)
+CMD ["java", "-jar", "app.jar"]
+
