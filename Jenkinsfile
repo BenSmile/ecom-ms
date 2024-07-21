@@ -8,6 +8,15 @@ pipeline {
         maven 'Maven3'
     }
 
+    environment {
+        APP_NAME = 'complete-production-e2e'
+        RELEASE = '1.0.0'
+        DOCKER_USERNAME = 'benKafirongo'
+        DOCKER_PASSWORD = 'docker_credentials'
+        IMAGE_NAME = "${DOCKER_USERNAME}/${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${env.BUILD_NUMBER}"
+    }
+
     stages {
         stage('Cleanup Workspace') {
             steps {
@@ -43,10 +52,33 @@ pipeline {
             }
         }
 
-         stage('Quality Gate') {
+        stage('Quality Gate') {
             steps {
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins_sonarqube_token'
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins_sonarqube_token'
+                }
+            }
+        }
+
+        stage('Build and Push Docker image') {
+            steps {
+                script {
+                    docker.withRegistry('', DOCKER_PASSWORD) {
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+
+                    docker.withRegistry('', DOCKER_PASSWORD) {
+                        docker_image.push("${IMAGE_TAG}")
+                        docker_image.push("latest")
+                    }
                 }
             }
         }
