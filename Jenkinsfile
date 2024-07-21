@@ -11,9 +11,9 @@ pipeline {
     environment {
         APP_NAME = 'complete-production-e2e'
         RELEASE = '1.0.0'
-        DOCKER_USERNAME = 'benKafirongo'
+        DOCKER_USERNAME = 'benkafirongo'
         DOCKER_PASSWORD = 'dockerhub'
-        IMAGE_NAME = "${DOCKER_USERNAME}/${APP_NAME}"
+        IMAGE_NAME = "${DOCKER_USERNAME}" + '/' + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${env.BUILD_NUMBER}"
     }
 
@@ -63,13 +63,13 @@ pipeline {
         stage('Build and Push Docker image') {
             steps {
                 script {
-                    docker.withRegistry('', DOCKER_PASSWORD) {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_PASSWORD) {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
 
-                    docker.withRegistry('', DOCKER_PASSWORD) {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_PASSWORD) {
                         docker_image.push("${IMAGE_TAG}")
-                        docker_image.push("latest")
+                        docker_image.push('latest')
                     }
                 }
             }
