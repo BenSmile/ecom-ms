@@ -8,6 +8,6 @@ spec:
     app: complete-production-e2e-app
   type: NodePort
   ports:
-    - port: 9595
-      targetPort: 9595
-      nodePort: 30111
+    - port: 8080
+      targetPort: 8080
+      nodePort: 8181
