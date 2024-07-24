@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        APP_NAME = 'complete-production-e2e'
+        APP_NAME = 'complete-production-e2e-app'
         RELEASE = '1.0.0'
         DOCKER_USERNAME = 'benkafirongo'
         DOCKER_PASSWORD = 'dockerhub'

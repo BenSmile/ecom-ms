@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: complete-production-e2e-app
-        image: benkafirongo/complete-production-e2e
+        image: benkafirongo/complete-production-e2e:changeme
         resources:
           limits:
             memory: "256Mi"
