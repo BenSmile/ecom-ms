@@ -12,6 +12,6 @@ public class HomeController {
 
     @GetMapping
     Map<String, String> appInfo(){
-        return Map.of("application name", "Product service", "time" , LocalDate.now().toString());
+        return Map.of("application name", "Product service", "time" , LocalDate.now().toString(), "zandi" , "mon bb Sophie et ma fille Celestes");
     }
 }
