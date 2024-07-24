@@ -8,7 +8,6 @@ import com.vodacomtraining.demo.Repository.ProductRepository;
 import com.vodacomtraining.demo.dto.OrderDto;
 import com.vodacomtraining.demo.dto.OrderItemDto;
 import jakarta.persistence.NoResultException;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
